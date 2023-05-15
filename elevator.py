@@ -9,14 +9,17 @@ class Elevator:
     self.max_occupancy = max_occupancy
     self.num_floors = num_floors
 
+  # Open the doors to the elevator
   def open_doors(self):
     self.door_status = 'open'
     print("Door is " + self.door_status)
 
+  # Close the doors to the elevator
   def close_doors(self):
     self.door_status = 'closed'
     print("Door is " + self.door_status)
 
+  # Add an occupant to the elevator and add floor occupant requests to queue
   def add_occupant(self):
     if len(self.queue) < self.max_occupancy:
       requested_floor = 0
@@ -32,10 +35,12 @@ class Elevator:
       print("Elevator full. Passenger cannot be added.")
       return False
 
+  # Remove an occupant from the elevator and queue
   def remove_occupant(self, index):
       self.queue.pop(index)
       print("Passenger is removed. Now at " + str(len(self.queue)) + " occupants.")
 
+  # Move the elevator up or down one floor
   def move(self):
     if self.direction == 'up':
       self.floor_level += 1

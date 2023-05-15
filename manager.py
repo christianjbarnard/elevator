@@ -28,14 +28,22 @@ class Manager:
       'direction': direction,
       'floor': floor
     }
+
+  # Continually generates requests for the elevator. One of the two major threads.
   def generate_traffic(self):
     while True:
+      # Create a request
       request = self.generate_request()
+
+      # Print request to console
       print('Passenger pressed ' + request['direction'] + ' button on floor ' + str(request['floor']))
+
+      # Add to outside queue and wait
       self.outside_queue.append(request)
       time.sleep(random.randrange(2, 5))
       
-  def run(self):
+  # Main loop for elevator to run. Processes requests inside elevator then outside the elevator. One of the two major threads.
+  def run_elevator(self):
     while True:
       # If no one in elevator, go to the floor that requested first
       if len(self.elevator.queue) == 0:
